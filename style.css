@@ -1,0 +1,384 @@
+/* ==========================================================================
+   RESET Y VARIABLES GLOBAL-MINIMALISTAS
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg-dark: #0a0908;
+    --bg-card: rgba(18, 16, 15, 0.75);
+    --text-primary: #f4f1de;
+    --text-secondary: #a8a39d;
+    --accent-orange: #e07a5f;
+    --accent-gold: #f4a261;
+    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+    --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   ARQUITECTURA DE NAVEGACIÓN CSS (Single Page sin JS)
+   ========================================================================== */
+.page-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.05);
+    transition: var(--transition-smooth);
+    overflow-y: auto;
+    z-index: 1;
+}
+
+/* Estado activo por defecto (Inicio) si no hay hash activo */
+#inicio {
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(1);
+    z-index: 2;
+}
+
+/* Cuando una sección es el target (cuando el enlace cambia el hash) */
+.page-section:target {
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(1);
+    z-index: 3;
+}
+
+/* Ocultar dinámicamente el inicio si otra sección está activa */
+body:has(section:target:not(#inicio)) #inicio {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95);
+}
+
+
+/* ==========================================================================
+   PÁGINA PRINCIPAL (SECCIÓN DE LA FOGATA)
+   ========================================================================== */
+.section-home {
+    /* Imagen premium de fogata desde Unsplash */
+    background-image: url('https://images.unsplash.com/photo-1754914908962-4475d98d43be?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: block;
+}
+
+/* Capa cinematográfica oscura con tinte cálido */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(10, 9, 8, 0.4) 0%, rgba(10, 9, 8, 0.95) 85%);
+    z-index: 1;
+}
+
+/* Contenedor del contenido del menú */
+.home-container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    z-index: 2;
+    min-height: 100%;
+}
+
+.main-header {
+    text-align: center;
+    margin-bottom: 80px;
+    animation: fadeInDown 1.5s ease;
+}
+
+.brand-logo {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: -1px;
+    color: var(--text-primary);
+    text-shadow: 0 0 40px rgba(224, 122, 95, 0.3);
+    display: inline-block;
+    position: relative;
+}
+
+.brand-logo::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--accent-orange);
+    margin: 15px auto 0;
+    box-shadow: 0 0 10px var(--accent-orange);
+}
+
+.tagline {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-top: 15px;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Sistema de bloques */
+.cancionero-nav {
+    display: block;
+    width: 100%;
+}
+
+.category-block {
+    display: block;
+    width: 46%;
+    float: left;
+    margin: 0 2% 40px 2%;
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(244, 241, 222, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: var(--transition-smooth);
+}
+
+.category-block:hover {
+    transform: translateY(-5px);
+    border-color: rgba(224, 122, 95, 0.2);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* Limpieza de floats */
+.cancionero-nav::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.category-title {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: var(--accent-gold);
+    font-weight: 400;
+    position: relative;
+    padding-left: 15px;
+}
+
+.category-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 25%;
+    width: 3px;
+    height: 50%;
+    background: var(--accent-gold);
+}
+
+.song-list {
+    list-style: none;
+}
+
+.song-list li {
+    margin-bottom: 18px;
+}
+
+.song-link {
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.song-number {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--accent-orange);
+    margin-right: 15px;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.song-name {
+    position: relative;
+    padding-bottom: 3px;
+}
+
+.song-name::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--text-primary);
+    transition: width 0.3s ease;
+}
+
+/* Efectos Hover */
+.song-link:hover .song-name::after {
+    width: 100%;
+}
+
+.song-link:hover {
+    padding-left: 8px;
+    color: #fff;
+}
+
+
+/* ==========================================================================
+   INTERIOR DE CANCIONES (ESTILO MINIMALISTA Y LIMPIO)
+   ========================================================================== */
+.section-song {
+    background-color: #0d0c0b;
+}
+
+.song-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 24px 120px 24px;
+}
+
+.back-button {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 50px;
+    transition: color 0.3s ease;
+    font-weight: 400;
+}
+
+.back-button:hover {
+    color: var(--accent-orange);
+}
+
+.song-header {
+    margin-bottom: 50px;
+    border-bottom: 1px solid rgba(244, 241, 222, 0.1);
+    padding-bottom: 30px;
+}
+
+.song-badge {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-gold);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.song-header h1 {
+    font-family: var(--font-serif);
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.song-meta {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+/* Contenedor de letras */
+.song-viewer {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: 40px;
+    border: 1px solid rgba(244, 241, 222, 0.03);
+}
+
+/* Bloque para conservar espacios fijos de acordes */
+.lyrics-block {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.15rem;
+    line-height: 2.2;
+    color: var(--text-primary);
+    white-space: pre-wrap;
+}
+
+/* Resaltador de acordes interactivo */
+.chord {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--accent-orange);
+    display: inline-block;
+    position: relative;
+    cursor: help;
+    transition: transform 0.2s ease;
+}
+
+.chord:hover {
+    transform: scale(1.15);
+    color: var(--accent-gold);
+}
+
+
+/* ==========================================================================
+   ANIMACIONES AUTÓNOMAS CSS
+   ========================================================================== */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Móviles y Tablets)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .category-block {
+        width: 100%;
+        float: none;
+        margin: 0 0 30px 0;
+        padding: 30px;
+    }
+    
+    .brand-logo {
+        font-size: 2.2rem;
+    }
+    
+    .song-header h1 {
+        font-size: 2rem;
+    }
+    
+    .lyrics-block {
+        font-size: 1rem;
+        line-height: 2.5;
+    }
+    
+    .home-container {
+        padding: 40px 16px;
+    }
+}
