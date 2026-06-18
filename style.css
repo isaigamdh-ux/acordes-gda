@@ -50,7 +50,6 @@ body {
     z-index: 1;
 }
 
-/* Estado activo por defecto (Inicio) si no hay hash activo */
 #inicio {
     opacity: 1;
     pointer-events: all;
@@ -58,7 +57,6 @@ body {
     z-index: 2;
 }
 
-/* Cuando una sección es el target (cuando el enlace cambia el hash) */
 .page-section:target {
     opacity: 1;
     pointer-events: all;
@@ -66,7 +64,6 @@ body {
     z-index: 3;
 }
 
-/* Ocultar dinámicamente el inicio si otra sección está activa */
 body:has(section:target:not(#inicio)) #inicio {
     opacity: 0;
     pointer-events: none;
@@ -75,35 +72,63 @@ body:has(section:target:not(#inicio)) #inicio {
 
 
 /* ==========================================================================
-   PÁGINA PRINCIPAL (SECCIÓN DE LA FOGATA)
+   SOLUCIÓN AL EFECTO DE RAYOS MULTIPANTALLA (ENFOQUE ADAPTATIVO REAL)
    ========================================================================== */
 .section-home {
-    /* Imagen premium de fogata desde Unsplash */
-    background-image: url('https://images.unsplash.com/photo-1754914908962-4475d98d43be?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-color: var(--bg-dark); 
     display: block;
+    position: relative;
 }
 
-/* Capa cinematográfica oscura con tinte cálido */
 .hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(10, 9, 8, 0.4) 0%, rgba(10, 9, 8, 0.95) 85%);
-    z-index: 1;
+    background: linear-gradient(180deg, rgba(10,9,8,0) 0%, rgba(10,9,8,0.8) 60%, rgba(10,9,8,1) 95%);
+    z-index: 4; 
 }
 
-/* Contenedor del contenido del menú */
+/* Tu contenedor solicitado intacto */
+.light-rays-container {
+    width: 100%;
+    height: 100%;
+    position: absolute; 
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 3;
+    overflow: hidden;
+}
+
+/* Solución definitiva: Se usan múltiples capas de gradientes en el mismo contenedor principal.
+   Al usar porcentajes (%) y variables fluidas, el foco amarillo se clava en el centro superior sin importar el ancho del móvil. */
+.light-rays-atmosphere {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    mix-blend-mode: screen;
+    opacity: 0.95;
+    
+    /* Capa 1: Centro Amarillo Ultra Dominante + Capa 2: Bordes Carmesí suave integrados */
+    background: 
+        radial-gradient(circle at 50% -10%, rgba(234, 179, 8, 0.5) 0%, rgba(234, 179, 8, 0.15) 35%, rgba(0,0,0,0) 65%),
+        radial-gradient(circle at 50% -15%, rgba(225, 29, 72, 0.25) 0%, rgba(225, 29, 72, 0.05) 50%, rgba(0,0,0,0) 80%);
+    
+    /* Difuminado de hardware masivo para eliminar cortes y unificar la atmósfera */
+    filter: blur(40px);
+    animation: atmosphericPulse 8s ease-in-out infinite alternate;
+}
+
 .home-container {
     position: relative;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 80px 24px;
-    z-index: 2;
+    padding: 90px 24px;
+    z-index: 5; 
     min-height: 100%;
 }
 
@@ -119,7 +144,7 @@ body:has(section:target:not(#inicio)) #inicio {
     font-weight: 600;
     letter-spacing: -1px;
     color: var(--text-primary);
-    text-shadow: 0 0 40px rgba(224, 122, 95, 0.3);
+    text-shadow: 0 0 30px rgba(234, 179, 8, 0.4); /* Resalta perfectamente con el nuevo fondo */
     display: inline-block;
     position: relative;
 }
@@ -129,46 +154,46 @@ body:has(section:target:not(#inicio)) #inicio {
     display: block;
     width: 40px;
     height: 2px;
-    background: var(--accent-orange);
+    background: #EAB308;
     margin: 15px auto 0;
-    box-shadow: 0 0 10px var(--accent-orange);
+    box-shadow: 0 0 10px #EAB308;
 }
 
 .tagline {
-    font-size: 1rem;
+    font-size: 1.4rem;
     color: var(--text-secondary);
     margin-top: 15px;
     font-weight: 300;
     letter-spacing: 1px;
 }
 
-/* Sistema de bloques */
 .cancionero-nav {
     display: block;
     width: 100%;
 }
 
 .category-block {
+    text-decoration: none;
     display: block;
     width: 46%;
     float: left;
     margin: 0 2% 40px 2%;
     background: var(--bg-card);
-    padding: 40px;
+    padding: 50px 40px;
     border-radius: 16px;
     border: 1px solid rgba(244, 241, 222, 0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     transition: var(--transition-smooth);
+    cursor: pointer;
 }
 
 .category-block:hover {
     transform: translateY(-5px);
-    border-color: rgba(224, 122, 95, 0.2);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border-color: rgba(234, 179, 8, 0.3); 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
 }
 
-/* Limpieza de floats */
 .cancionero-nav::after {
     content: "";
     display: table;
@@ -177,8 +202,8 @@ body:has(section:target:not(#inicio)) #inicio {
 
 .category-title {
     font-family: var(--font-serif);
-    font-size: 1.8rem;
-    margin-bottom: 30px;
+    font-size: 2rem;
+    margin-bottom: 10px;
     color: var(--accent-gold);
     font-weight: 400;
     position: relative;
@@ -195,190 +220,75 @@ body:has(section:target:not(#inicio)) #inicio {
     background: var(--accent-gold);
 }
 
-.song-list {
-    list-style: none;
-}
-
-.song-list li {
-    margin-bottom: 18px;
-}
-
-.song-link {
-    text-decoration: none;
-    display: block;
-    padding: 10px 0;
-    color: var(--text-primary);
-    font-size: 1.1rem;
-    font-weight: 400;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.song-number {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    color: var(--accent-orange);
-    margin-right: 15px;
-    font-weight: 600;
-    opacity: 0.7;
-}
-
-.song-name {
-    position: relative;
-    padding-bottom: 3px;
-}
-
-.song-name::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: var(--text-primary);
-    transition: width 0.3s ease;
-}
-
-/* Efectos Hover */
-.song-link:hover .song-name::after {
-    width: 100%;
-}
-
-.song-link:hover {
-    padding-left: 8px;
-    color: #fff;
-}
-
-
-/* ==========================================================================
-   INTERIOR DE CANCIONES (ESTILO MINIMALISTA Y LIMPIO)
-   ========================================================================== */
-.section-song {
-    background-color: #0d0c0b;
-}
-
-.song-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 60px 24px 120px 24px;
-}
-
-.back-button {
-    display: inline-block;
-    text-decoration: none;
-    color: var(--text-secondary);
+.category-subtitle {
     font-size: 0.95rem;
-    margin-bottom: 50px;
-    transition: color 0.3s ease;
-    font-weight: 400;
-}
-
-.back-button:hover {
-    color: var(--accent-orange);
-}
-
-.song-header {
-    margin-bottom: 50px;
-    border-bottom: 1px solid rgba(244, 241, 222, 0.1);
-    padding-bottom: 30px;
-}
-
-.song-badge {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--accent-gold);
-    font-weight: 600;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.song-header h1 {
-    font-family: var(--font-serif);
-    font-size: 2.8rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.song-meta {
-    font-size: 0.9rem;
     color: var(--text-secondary);
     font-weight: 300;
-}
-
-/* Contenedor de letras */
-.song-viewer {
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 12px;
-    padding: 40px;
-    border: 1px solid rgba(244, 241, 222, 0.03);
-}
-
-/* Bloque para conservar espacios fijos de acordes */
-.lyrics-block {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1.15rem;
-    line-height: 2.2;
-    color: var(--text-primary);
-    white-space: pre-wrap;
-}
-
-/* Resaltador de acordes interactivo */
-.chord {
-    font-family: var(--font-sans);
-    font-weight: 700;
-    color: var(--accent-orange);
-    display: inline-block;
-    position: relative;
-    cursor: help;
-    transition: transform 0.2s ease;
-}
-
-.chord:hover {
-    transform: scale(1.15);
-    color: var(--accent-gold);
+    padding-left: 15px;
 }
 
 
 /* ==========================================================================
-   ANIMACIONES AUTÓNOMAS CSS
+   VISTAS INTERMEDIAS Y ADICIONALES (Mantenidos)
+   ========================================================================== */
+.section-list-view { background-color: #0b0a09; }
+.list-container { max-width: 800px; margin: 0 auto; padding: 60px 24px; }
+.list-header { margin-bottom: 40px; border-bottom: 1px solid rgba(244, 241, 222, 0.05); padding-bottom: 20px; }
+.category-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-orange); font-weight: 600; display: block; margin-bottom: 10px; }
+.list-header h1 { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 600; }
+.song-list { list-style: none; }
+.song-list li { margin-bottom: 18px; }
+.song-link { text-decoration: none; display: block; padding: 14px 20px; background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(244, 241, 222, 0.02); border-radius: 8px; color: var(--text-primary); font-size: 1.1rem; font-weight: 400; transition: all 0.3s ease; }
+.song-number { font-family: var(--font-sans); font-size: 0.85rem; color: var(--accent-orange); margin-right: 15px; font-weight: 600; opacity: 0.7; }
+.song-link:hover { background: rgba(255, 255, 255, 0.03); border-color: rgba(244, 241, 222, 0.1); padding-left: 28px; color: #fff; }
+
+.section-song { background-color: #0d0c0b; }
+.song-container { max-width: 800px; margin: 0 auto; padding: 60px 24px 120px 24px; }
+.back-button { display: inline-block; text-decoration: none; color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 50px; transition: color 0.3s ease; font-weight: 400; }
+.back-button:hover { color: var(--accent-orange); }
+.song-header { margin-bottom: 50px; border-bottom: 1px solid rgba(244, 241, 222, 0.1); padding-bottom: 30px; }
+.song-badge { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-gold); font-weight: 600; display: block; margin-bottom: 10px; }
+.song-header h1 { font-family: var(--font-serif); font-size: 2.8rem; font-weight: 600; margin-bottom: 10px; }
+.song-meta { font-size: 0.9rem; color: var(--text-secondary); font-weight: 300; }
+.song-viewer { background: rgba(255, 255, 255, 0.02); border-radius: 12px; padding: 40px; border: 1px solid rgba(244, 241, 222, 0.03); overflow-x: auto; }
+.lyrics-block { font-family: 'Courier New', Courier, monospace; font-size: 1.15rem; line-height: 2.2; color: var(--text-primary); white-space: pre; }
+.chord { font-family: var(--font-sans); font-weight: 700; color: var(--accent-orange); display: inline; position: relative; cursor: help; transition: transform 0.2s ease; }
+.chord:hover { transform: scale(1.15); color: var(--accent-gold); }
+
+
+/* ==========================================================================
+   ANIMACIÓN FLUIDA DE AMBIENTE
    ========================================================================== */
 @keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animación de pulsación orgánica que no deforma los bordes en móviles */
+@keyframes atmosphericPulse {
+    0% { opacity: 0.8; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.03); }
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (Móviles y Tablets)
+   RESPONSIVE DESIGN (Celulares, Tablets y Laptops)
    ========================================================================== */
 @media (max-width: 768px) {
-    .category-block {
-        width: 100%;
-        float: none;
-        margin: 0 0 30px 0;
-        padding: 30px;
-    }
+    .home-container, .list-container, .song-container { padding: 40px 16px 60px 16px; }
+    .category-block { width: 100%; float: none; margin: 0 0 20px 0; padding: 35px 24px; }
+    .brand-logo { font-size: 2.1rem; }
+    .song-header h1 { font-size: 2rem; letter-spacing: -0.5px; }
+    .song-header { margin-bottom: 30px; padding-bottom: 20px; }
+    .song-viewer { padding: 20px 12px; border-radius: 8px; }
+    .lyrics-block { font-size: 0.95rem; line-height: 2.4; }
+    .back-button { margin-bottom: 25px; }
     
-    .brand-logo {
-        font-size: 2.2rem;
-    }
-    
-    .song-header h1 {
-        font-size: 2rem;
-    }
-    
-    .lyrics-block {
-        font-size: 1rem;
-        line-height: 2.5;
-    }
-    
-    .home-container {
-        padding: 40px 16px;
+    /* Optimizaciones de luz exclusivas para pantallas de celulares */
+    .light-rays-atmosphere {
+        filter: blur(30px); /* Un desenfoque menor para que la luz no se disipe por completo en pantallas chicas */
+        /* Cambiamos el radio a porcentajes fijos del viewport para clavar el círculo amarillo sobre el título móvil */
+        background: 
+            radial-gradient(circle at 50% -5%, rgb(255, 242, 0) 0%, rgba(234, 179, 8, 0.2) 45%, rgba(0,0,0,0) 75%),
+            radial-gradient(circle at 50% -5%, rgb(255, 94, 0) 0%, rgba(225, 29, 72, 0.05) 60%, rgba(0,0,0,0) 90%);
     }
 }

@@ -13,55 +13,78 @@
 
     <section id="inicio" class="page-section section-home">
         <div class="hero-overlay"></div>
+        
+        <!-- Tu nuevo contenedor de efectos integrado -->
+        <div class="light-rays-container">
+            <div class="light-rays-atmosphere"></div>
+        </div>
+        
         <div class="home-container">
             <header class="main-header">
-                <span class="brand-logo">GDA - Acordes y Letras</span>
-                <p class="tagline">Letras y acordes para momentos de conexión</p>
+                <span class="brand-logo">Generación de adoradores</span>
+                <p class="tagline">Acordes y Letras</p>
             </header>
 
             <main class="cancionero-nav">
-                <div class="category-block">
+                <a href="#lista-alabanza" class="category-block">
                     <h2 class="category-title">Alabanza</h2>
-                    <ul class="song-list">
-                        <li>
-                            <a href="#cancion-1" class="song-link">
-                                <span class="song-number">01</span>
-                                <span class="song-name">Cantaré de tu Amor</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#cancion-2" class="song-link">
-                                <span class="song-number">02</span>
-                                <span class="song-name">Gritos de Júbilo</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                    <p class="category-subtitle">Generación de Fuego</p>
+                </a>
 
-                <div class="category-block">
+                <a href="#lista-adoracion" class="category-block">
                     <h2 class="category-title">Adoración</h2>
-                    <ul class="song-list">
-                        <li>
-                            <a href="#cancion-3" class="song-link">
-                                <span class="song-number">03</span>
-                                <span class="song-name">Tu Fidelidad es Grande</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#cancion-4" class="song-link">
-                                <span class="song-number">04</span>
-                                <span class="song-name">Encuentro en el Fuego</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                    <p class="category-subtitle">Generación de Fuego</p>
+                </a>
             </main>
+        </div>
+    </section>
+
+    <!-- LAS SECCIONES DE LISTADO Y LETRAS QUEDAN IGUALMENTE COMPATIBLES ABAJO -->
+    <section id="lista-alabanza" class="page-section section-list-view">
+        <div class="list-container">
+            <a href="#inicio" class="back-button">← Volver al inicio</a>
+            <header class="list-header">
+                <span class="category-tag">Categoría</span>
+                <h1>Alabanzas</h1>
+            </header>
+            <ul class="song-list">
+                <li>
+                    <a href="#cancion-1" class="song-link">
+                        <span class="song-number">01</span>
+                        <span class="song-name">Cantaré de tu Amor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#cancion-2" class="song-link">
+                        <span class="song-number">02</span>
+                        <span class="song-name">Gritos de Júbilo</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="lista-adoracion" class="page-section section-list-view">
+        <div class="list-container">
+            <a href="#inicio" class="back-button">← Volver al inicio</a>
+            <header class="list-header">
+                <span class="category-tag">Categoría</span>
+                <h1>Adoración</h1>
+            </header>
+            <ul class="song-list">
+                <li>
+                    <a href="#cancion-3" class="song-link">
+                        <span class="song-number">03</span>
+                        <span class="song-name">Digno de Confianza</span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </section>
 
     <section id="cancion-1" class="page-section section-song">
         <div class="song-container">
-            <a href="#inicio" class="back-button">← Volver al inicio</a>
+            <a href="#lista-alabanza" class="back-button">← Volver a Alabanzas</a>
             <header class="song-header">
                 <span class="song-badge">Alabanza</span>
                 <h1>Cantaré de tu Amor</h1>
@@ -84,7 +107,7 @@ me diste la libertad.
 
     <section id="cancion-2" class="page-section section-song">
         <div class="song-container">
-            <a href="#inicio" class="back-button">← Volver al inicio</a>
+            <a href="#lista-alabanza" class="back-button">← Volver a Alabanzas</a>
             <header class="song-header">
                 <span class="song-badge">Alabanza</span>
                 <h1>Gritos de Júbilo</h1>
@@ -107,49 +130,77 @@ mi Rey y mi Salvador.
 
     <section id="cancion-3" class="page-section section-song">
         <div class="song-container">
-            <a href="#inicio" class="back-button">← Volver al inicio</a>
+            <a href="#lista-adoracion" class="back-button">← Volver a Adoración</a>
             <header class="song-header">
                 <span class="song-badge">Adoración</span>
-                <h1>Tu Fidelidad es Grande</h1>
-                <p class="song-meta">Tono: C (Do Mayor) | Compás: 3/4</p>
+                <h1>Digno de Confianza</h1>
+                <p class="song-meta">Tono: B (Si Mayor) | Compás: 4/4</p>
             </header>
             <div class="song-viewer">
                 <pre class="lyrics-block">
-     <span class="chord">C</span>              <span class="chord">F</span>
-Tu fidelidad es tan grande Dios,
-     <span class="chord">Dm</span>             <span class="chord">G</span>
-tu amor nunca fallará.
-     <span class="chord">Am</span>             <span class="chord">F</span>
-Cada mañana tu gracia es nueva,
-     <span class="chord">C</span>     <span class="chord">G</span>        <span class="chord">C</span>
-conmigo siempre estarás.
+INTRO
+<span class="chord">B</span> <span class="chord">F#</span> <span class="chord">G#m</span> <span class="chord">E</span> (<span class="chord">E/C#</span>)
+<span class="chord">B</span> <span class="chord">F#</span> <span class="chord">G#m</span> <span class="chord">E</span> - <span class="chord">F#</span>
+
+VERSO
+                     <span class="chord">B</span>
+Tu palabra es la verdad
+                   <span class="chord">F#</span>           
+Que mi camino guiará
+           <span class="chord">C#m</span>            <span class="chord">F# (F#sus4)</span> <span class="chord">F#</span>
+Me das la fuerza en mi debilidad
+             <span class="chord">B</span>            
+Tu eres la paz
+                       <span class="chord">F#</span>
+En medio de la tempestad
+          <span class="chord">C#m</span>       <span class="chord">F#</span>     <span class="chord">(F#sus4)</span> <span class="chord">F#</span>
+Eres la roca donde puedo descansar
+
+PRECORO
+  <span class="chord">E</span>                  <span class="chord">F#</span>
+//Fiel, desde el principio
+<span class="chord">C#m</span>            <span class="chord">F#</span>
+Fiel, hasta el final (en ti puedo confiar)//
+
+CORO
+      <span class="chord">B</span>                       <span class="chord">F#</span>
+Eres Digno de confianza solo tu
+                <span class="chord">E</span>           <span class="chord">F#</span> 
+Digno eres de gloria oh Jesús
+        <span class="chord">C#m</span>       <span class="chord">B</span>
+Mereces toda mi adoración
+(<span class="chord">B</span> <span class="chord">C#m</span> <span class="chord">B/D#</span>) <span class="chord">E</span>        <span class="chord">F#</span>         <span class="chord">G#m</span> <span class="chord">F#</span>
+So  lo  a   ti rendimos nuestro corazón
+
+VERSO 2
+                     <span class="chord">B</span>
+Me asombra tu fidelidad
+                      <span class="chord">G#m</span>
+Aun cuando llego a fallar
+                          <span class="chord">E</span>   <span class="chord">F#</span>
+Yo sé que sigues siendo fiel
+Se que tu has sido
+
+INSTRUMENTAL
+<span class="chord">E</span> <span class="chord">F#</span> <span class="chord">G#m</span> <span class="chord">F#</span>
+
+PUENTE
+          <span class="chord">E</span>
+No temas corazón
+        <span class="chord">F#</span>
+No te abatas alma mía
+          <span class="chord">G#m</span>
+Bueno es el Señor
+       <span class="chord">F#</span>
+El es Fiel y Verdadero
+
+SOLO GUITARRA
+<span class="chord">E</span> <span class="chord">F#</span> <span class="chord">G#m</span> <span class="chord">F#</span>
                 </pre>
             </div>
         </div>
     </section>
 
-    <section id="cancion-4" class="page-section section-song">
-        <div class="song-container">
-            <a href="#inicio" class="back-button">← Volver al inicio</a>
-            <header class="song-header">
-                <span class="song-badge">Adoración</span>
-                <h1>Encuentro en el Fuego</h1>
-                <p class="song-meta">Tono: Em (Mi Menor) | Compás: 4/4</p>
-            </header>
-            <div class="song-viewer">
-                <pre class="lyrics-block">
-     <span class="chord">Em</span>             <span class="chord">C</span>
-En la quietud puedo escuchar,
-     <span class="chord">G</span>              <span class="chord">D</span>
-tu suave voz llamándome.
-     <span class="chord">Em</span>             <span class="chord">C</span>
-Como un fuego en mi corazón,
-     <span class="chord">G</span>     <span class="chord">D</span>        <span class="chord">Em</span>
-consúmeme otra vez.
-                </pre>
-            </div>
-        </div>
-    </section>
-
+<script src="main.js"></script>
 </body>
 </html>
